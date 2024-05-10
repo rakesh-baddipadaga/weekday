@@ -3,14 +3,21 @@ import React, { useState } from "react";
 
 function Jobfilter() {
     const [filters, setFilters] = useState({
-        minExperience: "",
-        companyName: "",
-        location: "",
-        remote: "",
-        techStack: "",
         role: "",
-        minBasePay: ""
+        minExperience: "",
+        remote: "",
+        minBasePay: "",
+        location: "",
+        companyName: "",
+        // techStack: "",
     });
+
+    const handleinputchange=(event)=>{
+
+    }
+
+
+
     return (
         <div>
             <form>
@@ -18,7 +25,10 @@ function Jobfilter() {
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="roles" 
                             label="Roles"
-                        
+                            values={filters.role}
+                            onChange={handleinputchange}
+                            fullWidth
+                            select
                         >
                             <MenuItem value="Frontend">Frontend</MenuItem>
                             <MenuItem value="Backend">Backend</MenuItem>
@@ -35,6 +45,10 @@ function Jobfilter() {
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="minExperience" 
                             label="Experience"
+                            values={filters.minExperience}
+                            onChange={handleinputchange}
+                            fullWidth
+                            select
                         >
                             <MenuItem value="1">1 year</MenuItem>
                             <MenuItem value="2">2 years</MenuItem>
@@ -50,17 +64,33 @@ function Jobfilter() {
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="location"
-                            label="Remote"></TextField>
+                            label="Remote"
+                            values={filters.remote}
+                            onChange={handleinputchange}
+                            fullWidth
+                            select
+                            >
+                            <MenuItem value="remote">Remote</MenuItem>
+                            <MenuItem value="hybrid">Hybrid</MenuItem>
+                            <MenuItem value="office">office</MenuItem>
+
+                            </TextField>
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="minbasepaysalary"
                             label="Minimum Base Pay Salary"
+                            values={filters.minBasePay}
+                            onChange={handleinputchange}
+                            fullWidth
+                            select
                         ></TextField>
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="searchcompany name"
                             label="Search Company Name"
-
+                            values={filters.role}
+                            onChange={handleinputchange}
+                            fullWidth
                         ></TextField>
                     </Grid>
                 </Grid>
