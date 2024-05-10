@@ -1,7 +1,7 @@
 import { Grid, MenuItem, TextField } from "@mui/material";
 import React, { useState } from "react";
 
-function Jobfilter() {
+function Jobfilter({onFilter}) {
     const [filters, setFilters] = useState({
         role: "",
         minExperience: "",
@@ -13,7 +13,9 @@ function Jobfilter() {
     });
 
     const handleinputchange=(event)=>{
-
+        const { name, value } = event.target;
+        setFilters({ ...filters, [name]: value });
+        onFilter({...filters,[name]:value});
     }
 
 
@@ -72,7 +74,7 @@ function Jobfilter() {
                             >
                             <MenuItem value="remote">Remote</MenuItem>
                             <MenuItem value="hybrid">Hybrid</MenuItem>
-                            <MenuItem value="office">office</MenuItem>
+                            <MenuItem value="In-Office">In-Office</MenuItem>
 
                             </TextField>
                     </Grid>
@@ -88,7 +90,7 @@ function Jobfilter() {
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="searchcompany name"
                             label="Search Company Name"
-                            values={filters.role}
+                            values={filters.companyName}
                             onChange={handleinputchange}
                             fullWidth
                         ></TextField>

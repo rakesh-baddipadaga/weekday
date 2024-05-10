@@ -3,36 +3,55 @@ import Jobfilter from "./Jobfilter";
 import samplejobdata from "./sampledata";
 import { Button, Card, CardContent, Grid, Modal, Typography } from "@mui/material";
 import FlashOnIcon from '@material-ui/icons/FlashOn';
+import { useDispatch, useSelector } from "react-redux";
+import { setJobData } from "../redux/reducers";
+import './Jobcard.css'
 
 function Jobcard() {
 
-    const [data, setData] = useState(samplejobdata);
-    
-    const [filteredata,setFiltereddata]=useState([...data]);
+    const jobData = useSelector(state => state.jobData);
+    const dispatch = useDispatch();
+
+
+
+    const [filteredData, setFilteredData] = useState([...jobData]); // Initialize filteredData with all job listings
     const [showMore, setShowMore] = useState({});
 
 
     useEffect(()=>{
-        setFiltereddata([...data]);
-    },[data]);
+        dispatch(setJobData(samplejobdata));
+        },[dispatch])
+
+    useEffect(()=>{
+        setFilteredData([...jobData]);
+    },[jobData]);
 
     //Function for filtering the jobs based on search criteria
     const filterJobs = (filters) => {
-        let filteredJobs = data.filter(job => {
+        let filteredJobs = jobData.filter(job => {
             // Check if each filter criteria matches with the job listing
-            return (
-                (filters.minExperience === "" || (job.minExp >= parseInt(filters.minExperience))) &&
-                (filters.companyName === "" || job.companyName.toLowerCase().includes(filters.companyName.toLowerCase())) &&
-                (filters.location === "" || job.location.toLowerCase().includes(filters.location.toLowerCase())) &&
-                (filters.remote === "" || job.remote === (filters.remote === "true")) &&
-                (filters.techStack === "" || job.techStack.toLowerCase().includes(filters.techStack.toLowerCase())) &&
-                (filters.role === "" || job.role.toLowerCase().includes(filters.role.toLowerCase())) &&
-                (filters.minBasePay === "" || (job.minJdSalary >= parseInt(filters.minBasePay)))
-            );
+            // return (
+            //     (filters.minExperience === "" || (job.minExp >= parseInt(filters.minExperience))) &&
+            //     (filters.companyName === "" || (job.companyName && job.companyName.toLowerCase().includes(filters.companyName.toLowerCase()))) &&
+            //     (filters.location === "" || (job.location && job.location.toLowerCase().includes(filters.location.toLowerCase()))) &&
+            //     (filters.remote === "" || job.remote === (filters.remote === "true")) &&
+            //     (filters.role === "" || (job.role && job.role.toLowerCase().includes(filters.role.toLowerCase()))) &&
+            //     (filters.minBasePay === "" || (job.minJdSalary >= parseInt(filters.minBasePay)))
+            // );
+
+
+             return (
+                 (filters.minExperience === "" || (job.minExp >= parseInt(filters.minExperience))) &&
+                 (filters.companyName === "" || job.companyName.toLowerCase().includes(filters.companyName.toLowerCase())) &&
+                //  (filters.location === "" || job.location.toLowerCase().includes(filters.location.toLowerCase())) &&
+                //  (filters.remote === "" || job.remote === (filters.remote === "true")) &&
+                 (filters.role === "" || job.role.toLowerCase().includes(filters.role.toLowerCase())) 
+                //  (filters.minBasePay === "" || (job.minJdSalary >= parseInt(filters.minBasePay)))
+             );
         });
 
         // Update filtered data state
-        setFiltereddata(filteredJobs);
+        setFilteredData(filteredJobs);
     };
 
 
@@ -48,9 +67,9 @@ function Jobcard() {
 
     return (
         <div>
-            <Jobfilter />
+            <Jobfilter onFilter={filterJobs} />
             <Grid container spacing={3}>
-                {data?.map((item,index) => (
+                {jobData?.map((item,index) => (
                     <Grid item xs={12} sm={6} md={4} lg={4} key={item.jdUid}>
                         <Card className="cardcontainer">
                         <CardContent>

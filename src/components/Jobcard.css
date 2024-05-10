@@ -1,4 +1,60 @@
-.cardcontainer{
+
+.cardContainer {
     position: relative;
-    margin: 10px;
+    margin:10px; 
+    height:300px;
+    /* width: 250px; */
+}
+
+.logo {
+position: absolute;
+top: 10px;
+left: 10px;
+width: 50px; 
+height: 50px; 
+}
+
+.details {
+/* margin-left: 60px;  */
+
+}
+
+.jobTitle {
+font-weight: bold;
+}
+
+.salary {
+margin-top: 10px;
+font-size: 14px;
+}
+
+.jobDescription {
+margin-top: 10px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+} 
+
+.applyButton {
+margin-top: 10px;
+width: 100%;
+}
+
+.companyandtitle {
+display: flex;
+align-items: center;
+}
+
+.companyandtitletext {
+margin-left: 40px;
+}
+
+.showMoreLink{
+color: blue;
+text-decoration: none;
+}
+
+.about{
+display: flex;
+align-items: flex-start;
 }
