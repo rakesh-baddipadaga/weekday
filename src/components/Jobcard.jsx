@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Jobfilter from "./Jobfilter";
 import samplejobdata from "./sampledata";
 import { Button, Card, CardContent, Grid, Modal, Typography } from "@mui/material";
+import FlashOnIcon from '@material-ui/icons/FlashOn';
 
 function Jobcard() {
 
@@ -52,32 +53,45 @@ function Jobcard() {
                 {data?.map((item,index) => (
                     <Grid item xs={12} sm={6} md={4} lg={4} key={item.jdUid}>
                         <Card className="cardcontainer">
-                            <CardContent>
-                                <Typography>
-                                    <img src={item.logoUrl} alt={item.companyName} />
-                                </Typography>
-                                <Typography variant="h5" component="h2">
-                                    {item.jobRole}
-                                </Typography>
-                                <Typography color="textSecondary">
-                                    {item.companyName}
-                                </Typography>
-                                <Typography color="textSecondary">
-                                    Location: {item.location}
-                                </Typography>
-                                <Typography variant="body2" component="p">
-                                    {item.jobDetailsFromCompany.substring(0, 150)}...
-                                    {/* Displaying a limited portion of job description */}
-                                </Typography>
-                                <Typography color="textSecondary">
-                                    Experience: {item.minExp} - {item.maxExp} years
-                                </Typography>
-                                <Button variant="contained" color="primary" href={item.jdLink}>
-                                    Easy Apply
-                                </Button>
-                                <Button variant="contained" color="primary" onClick={()=>handleLoadMore(index)}>
-                                    Easy Apply
-                                </Button>
+                        <CardContent>
+                                <div className="companyandtitle">
+                                    <div>
+                                        <img src={item.logoUrl} alt={item.companyName} className="logo" />
+                                    </div>
+                                    <div className="companyandtitletext">
+                                        <Typography color="textSecondary" className="companyName">
+                                            {item.companyName}
+                                        </Typography>
+                                        <Typography variant="h5" component="h2" className="jobTitle">
+                                            {item.jobRole}
+                                        </Typography>
+                                        <Typography variant="h5" component="h2" className="jobTitle">
+                                            {item.location}
+                                        </Typography>
+                                    </div>
+                                </div>
+                                <div className="details">
+                                    {item.minJdSalary && item.maxJdSalary && (
+                                        <Typography color="textSecondary" className="salary">
+                                            Expected Salary: {item.minJdSalary} - {item.maxJdSalary} {item.salaryCurrencyCode}
+                                        </Typography>
+                                    )}
+                                    <Typography className="about">About Company :</Typography>
+                                    <Typography variant="body2" component="p" className="jobDescription">
+                                        {showMore[index] ? item.jobDetailsFromCompany : item.jobDetailsFromCompany.substring(0, 150) + '...'}
+                                    </Typography>
+                                    <a href="#" onClick={() => handleLoadMore(index)} className="showMoreLink">
+                                        Show More
+                                    </a>
+                                    {item.minExp && (
+                                        <Typography color="textSecondary">
+                                            Minimum Experience: {item.minExp} years
+                                        </Typography>
+                                    )}
+                                    <Button component="a" variant="contained" color="primary" href={item.jdLink} className="applyButton"  startIcon={<FlashOnIcon />}>
+                                        Easy Apply
+                                    </Button>
+                                </div>
                             </CardContent>
                         </Card>
                         <Modal open={showMore[index]} onClose={() => handleCloseMore(index)} style={{
