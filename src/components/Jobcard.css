@@ -5,6 +5,14 @@
 .box{
     height: 20px;
 }
+
+.nodata{
+    width: 50rem;
+    border: 1px green solid;
+    /* justify-content: center; */
+    text-align: center;
+
+}
 .cardContainer {
     position: relative;
     margin:10px; 

@@ -9,6 +9,7 @@ function Jobfilter({onFilter}) {
         minBasePay: "",
         location: "",
         companyName: "",
+        minbasepaysalary:"0-1000"
         // techStack: "",
     });
 
@@ -25,13 +26,14 @@ function Jobfilter({onFilter}) {
             <form>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} md={2}>
-                        <TextField name="roles" 
+                        <TextField name="role" 
                             label="Roles"
                             values={filters?.role}
                             onChange={handleinputchange}
                             fullWidth
                             select
                         >
+                            <MenuItem value="">Any</MenuItem>
                             <MenuItem value="Frontend">Frontend</MenuItem>
                             <MenuItem value="Backend">Backend</MenuItem>
                             <MenuItem value="Fullstack">Fullstack</MenuItem>
@@ -52,6 +54,7 @@ function Jobfilter({onFilter}) {
                             fullWidth
                             select
                         >
+                            <MenuItem value="">Any</MenuItem>
                             <MenuItem value="1">1 year</MenuItem>
                             <MenuItem value="2">2 years</MenuItem>
                             <MenuItem value="3">3 years</MenuItem>
@@ -88,7 +91,8 @@ function Jobfilter({onFilter}) {
                             fullWidth
                             select
                         >
-                            <MenuItem value="">Any</MenuItem>
+
+                            <MenuItem value="0-1000">Any</MenuItem>
                             <MenuItem value="0-20">0 - 20</MenuItem>
                             <MenuItem value="20-50">20 - 50</MenuItem>
                             <MenuItem value="50-100">50 - 100</MenuItem>

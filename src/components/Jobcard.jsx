@@ -6,6 +6,7 @@ import FlashOnIcon from '@material-ui/icons/FlashOn';
 import { useDispatch, useSelector } from "react-redux";
 import { setJobData } from "../redux/reducers";
 import './Jobcard.css'
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 function Jobcard() {
 
@@ -28,18 +29,19 @@ function Jobcard() {
 
     //Function for filtering the jobs based on search criteria
     const filterJobs = (filters) => {
-        console.log(filters);
+        // console.log(filters);
         let filteredJobs = jobData.filter(job => {
 
-             return (
-                 (filters.minExperience === "" || (job.minExp >= parseInt(filters.minExperience))) &&
-                 (filters.companyName === "" || job.companyName.toLowerCase().includes(filters.companyName.toLowerCase())) &&
-                 (filters.location === "" || job.location.toLowerCase().includes(filters.location.toLowerCase())) &&
-                 (filters.role === "" || job.jobRole.toLowerCase().includes(filters.JobRole.toLowerCase())) &&
-                 (filters.minbasepaysalary === "" || (job.minJdSalary >= parseInt(filters.minbasepaysalary.split("-")[0]) && job.minJdSalary <=   parseInt(filters.minbasepaysalary.split("-")[1])))
-             );
+            return (
+                (filters.minExperience === "" || (job.minExp >= parseInt(filters.minExperience))) 
+                && (filters.companyName === "" || job.companyName.toLowerCase().includes(filters.companyName.toLowerCase())) 
+                && (filters.location === "" || job.location.toLowerCase().includes(filters.location.toLowerCase()))
+                && (filters.role === "" || job.jobRole.toLowerCase().includes(filters.role.toLowerCase()))   
+                && (filters.minbasepaysalary === "" || (job.minJdSalary >= parseInt(filters.minbasepaysalary.split("-")[0]) && job.minJdSalary <=   parseInt(filters.minbasepaysalary.split("-")[1])))
+            );
         });
 
+    
         // Update filtered data state
         setFilteredData([...filteredJobs]);
     };
@@ -60,7 +62,11 @@ function Jobcard() {
             <Jobfilter onFilter={filterJobs} />
             <Box className="box"></Box>
             <Grid container spacing={3}>
-                {filteredData?.map((item,index) => (
+            {filteredData?.length === 0 ? (
+                    <Typography variant="body1" ><div className="nodata"><h3>No Jobs available for this  category at the moment.</h3></div></Typography>
+                ) :(
+                    
+                    filteredData?.map((item,index) => (
                     <Grid item xs={12} sm={6} md={4} lg={4} key={item.jdUid}>
                         <Card className="cardcontainer">
                         <CardContent>
@@ -79,13 +85,14 @@ function Jobcard() {
                                 </Typography>
                             </div>
                         </div>
-                        <Typography sx={{fontSize: "16px"}}>
+                        <Typography sx={{fontSize: "16px", textTransform:"capitalize"}}>
                             {item.location}
                         </Typography>
                         <div className="details">
                             {item.minJdSalary && item.maxJdSalary && (
                                 <Typography color="textSecondary" className="salary">
                                     Expected Salary: {item.minJdSalary} - {item.maxJdSalary} {item.salaryCurrencyCode}
+                                    <CheckBoxIcon color="success" style={{verticalAlign:'middle'}}></CheckBoxIcon>
                                 </Typography>
                             )}
                             <Typography className="about">About Company :</Typography>
@@ -99,7 +106,7 @@ function Jobcard() {
                             </a>
                             {item.minExp && (
                                 <Typography color="textSecondary" className="experience">
-                                    Minimum Experience: {item.minExp} years
+                                    Minimum Experience:{item.minExp} years
                                 </Typography>
                             )}
                             <Button component="a" variant="contained" color="primary" href={item.jdLink} className="applyButton"  startIcon={<FlashOnIcon />}>
@@ -122,7 +129,8 @@ function Jobcard() {
                             </Card>
                         </Modal>
                     </Grid>
-                ))}
+                )))}
+
 
             </Grid>
         </div>
