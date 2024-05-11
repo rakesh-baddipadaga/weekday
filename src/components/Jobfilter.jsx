@@ -13,6 +13,7 @@ function Jobfilter({onFilter}) {
         // techStack: "",
     });
 
+    //for handling the input change of search
     const handleinputchange=(event)=>{
         const { name, value } = event.target;
         setFilters({ ...filters, [name]: value });
@@ -41,6 +42,7 @@ function Jobfilter({onFilter}) {
                             <MenuItem value="Flutter">Flutter</MenuItem>
                         </TextField>
                     </Grid>
+                    {/* The filter is not used, because the the given data doesn't contain the no of employees attribute */}
                     {/* <Grid item xs={12} sm={6} md={2}>
                         <TextField name="no of employees"
                             label="No Of Employees"
