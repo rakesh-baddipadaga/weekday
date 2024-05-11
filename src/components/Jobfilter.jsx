@@ -27,7 +27,7 @@ function Jobfilter({onFilter}) {
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="roles" 
                             label="Roles"
-                            values={filters.role}
+                            values={filters?.role}
                             onChange={handleinputchange}
                             fullWidth
                             select
@@ -39,15 +39,15 @@ function Jobfilter({onFilter}) {
                             <MenuItem value="Flutter">Flutter</MenuItem>
                         </TextField>
                     </Grid>
-                    <Grid item xs={12} sm={6} md={2}>
+                    {/* <Grid item xs={12} sm={6} md={2}>
                         <TextField name="no of employees"
                             label="No Of Employees"
                         ></TextField>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="minExperience" 
                             label="Experience"
-                            values={filters.minExperience}
+                            values={filters?.minExperience}
                             onChange={handleinputchange}
                             fullWidth
                             select
@@ -67,30 +67,38 @@ function Jobfilter({onFilter}) {
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="location"
                             label="Remote"
-                            values={filters.remote}
+                            values={filters?.remote}
                             onChange={handleinputchange}
                             fullWidth
                             select
                             >
+                            <MenuItem value="">Any</MenuItem>
+                            <MenuItem value="bangalore">bangalore</MenuItem>
+                            <MenuItem value="chennai">chennai</MenuItem>
+                            <MenuItem value="delhi ncr">delhi ncr</MenuItem>
                             <MenuItem value="remote">Remote</MenuItem>
-                            <MenuItem value="hybrid">Hybrid</MenuItem>
-                            <MenuItem value="In-Office">In-Office</MenuItem>
 
                             </TextField>
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
                         <TextField name="minbasepaysalary"
                             label="Minimum Base Pay Salary"
-                            values={filters.minBasePay}
+                            values={filters?.minBasePay}
                             onChange={handleinputchange}
                             fullWidth
                             select
-                        ></TextField>
+                        >
+                            <MenuItem value="">Any</MenuItem>
+                            <MenuItem value="0-20">0 - 20</MenuItem>
+                            <MenuItem value="20-50">20 - 50</MenuItem>
+                            <MenuItem value="50-100">50 - 100</MenuItem>
+                            <MenuItem value="100-150">100 - 150</MenuItem>
+                        </TextField>
                     </Grid>
                     <Grid item xs={12} sm={6} md={2}>
-                        <TextField name="searchcompany name"
+                        <TextField name="companyName"
                             label="Search Company Name"
-                            values={filters.companyName}
+                            values={filters?.companyName}
                             onChange={handleinputchange}
                             fullWidth
                         ></TextField>

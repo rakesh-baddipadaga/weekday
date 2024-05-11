@@ -1,4 +1,10 @@
+.main{
+    padding: 20px;
+}
 
+.box{
+    height: 20px;
+}
 .cardContainer {
     position: relative;
     margin:10px; 
@@ -6,13 +12,13 @@
     /* width: 250px; */
 }
 
-.logo {
+/* .logo {
 position: absolute;
 top: 10px;
 left: 10px;
 width: 50px; 
 height: 50px; 
-}
+} */
 
 .details {
 /* margin-left: 60px;  */
@@ -26,6 +32,7 @@ font-weight: bold;
 .salary {
 margin-top: 10px;
 font-size: 14px;
+text-align: left;
 }
 
 .jobDescription {
@@ -43,10 +50,13 @@ width: 100%;
 .companyandtitle {
 display: flex;
 align-items: center;
+justify-content: flex-start;
+    width: 100%;
+    gap: 20px;
 }
 
 .companyandtitletext {
-margin-left: 40px;
+text-align: left;
 }
 
 .showMoreLink{
@@ -54,7 +64,24 @@ color: blue;
 text-decoration: none;
 }
 
+
+.experience{
+    text-align: left;
+}
 .about{
 display: flex;
 align-items: flex-start;
+}
+.about-us{
+    display: flex;
+    align-items: flex-start;
+}
+.modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+.modalcard{
+    height: 450px;
+    width: 350px;
 }

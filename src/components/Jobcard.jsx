@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Jobfilter from "./Jobfilter";
 import samplejobdata from "./sampledata";
-import { Button, Card, CardContent, Grid, Modal, Stack, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Grid, Modal, Stack, Typography } from "@mui/material";
 import FlashOnIcon from '@material-ui/icons/FlashOn';
 import { useDispatch, useSelector } from "react-redux";
 import { setJobData } from "../redux/reducers";
@@ -35,9 +35,8 @@ function Jobcard() {
                  (filters.minExperience === "" || (job.minExp >= parseInt(filters.minExperience))) &&
                  (filters.companyName === "" || job.companyName.toLowerCase().includes(filters.companyName.toLowerCase())) &&
                  (filters.location === "" || job.location.toLowerCase().includes(filters.location.toLowerCase())) &&
-                //  (filters.remote === "" || job.remote === (filters.remote === "true")) &&
-                 (filters.role === "" || job.jobRole.toLowerCase().includes(filters.JobRole.toLowerCase())) 
-                //  (filters.minBasePay === "" || (job.minJdSalary >= parseInt(filters.minBasePay)))
+                 (filters.role === "" || job.jobRole.toLowerCase().includes(filters.JobRole.toLowerCase())) &&
+                 (filters.minbasepaysalary === "" || (job.minJdSalary >= parseInt(filters.minbasepaysalary.split("-")[0]) && job.minJdSalary <=   parseInt(filters.minbasepaysalary.split("-")[1])))
              );
         });
 
@@ -57,8 +56,9 @@ function Jobcard() {
 
 
     return (
-        <div>
+        <div className="main">
             <Jobfilter onFilter={filterJobs} />
+            <Box className="box"></Box>
             <Grid container spacing={3}>
                 {filteredData?.map((item,index) => (
                     <Grid item xs={12} sm={6} md={4} lg={4} key={item.jdUid}>
@@ -89,6 +89,8 @@ function Jobcard() {
                                 </Typography>
                             )}
                             <Typography className="about">About Company :</Typography>
+                            <Typography className="about-us">About us:</Typography>
+
                             <Typography variant="body2" component="p" className="jobDescription">
                                 {showMore[index] ? item.jobDetailsFromCompany : item.jobDetailsFromCompany.substring(0, 150) + '...'}
                             </Typography>
@@ -96,7 +98,7 @@ function Jobcard() {
                                 Show More
                             </a>
                             {item.minExp && (
-                                <Typography color="textSecondary">
+                                <Typography color="textSecondary" className="experience">
                                     Minimum Experience: {item.minExp} years
                                 </Typography>
                             )}
@@ -107,12 +109,8 @@ function Jobcard() {
                 </Stack>
                             </CardContent>
                         </Card>
-                        <Modal open={showMore[index]} onClose={() => handleCloseMore(index)} style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}>
-                            <Card style={{ height: '450px', width: '350px' }}>
+                        <Modal open={showMore[index]} onClose={() => handleCloseMore(index)} className="modal">
+                            <Card className="modalcard">
                                 <CardContent>
                                     <Typography color="textSecondary">
                                         {item.companyName}
